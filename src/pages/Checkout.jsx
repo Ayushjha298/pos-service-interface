@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Button, Typography, Paper, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
 const Checkout = () => {
   const [customer, setCustomer] = useState({ name: "", email: "" });
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const navigate = useNavigate();
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +29,8 @@ const Checkout = () => {
   const closeDialog = () => setPaymentSuccess(false);
 
   const navigateToReceipt = () => {
-    navigate("/receipt", { state: { customer } });
+    navigate("/receipt", { state: { customer, cart } });
+    localStorage.removeItem("cart"); 
   };
 
   return (

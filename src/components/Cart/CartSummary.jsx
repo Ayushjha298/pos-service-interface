@@ -11,20 +11,21 @@ import {
   Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 
-const CartSummary = ({ cart, setCart }) => {
+const CartSummary = ({ cart, setCart, onClose }) => {
   const updateQuantity = (index, newQuantity) => {
     const updatedCart = cart.map((item, i) =>
       i === index ? { ...item, quantity: Math.max(1, parseInt(newQuantity) || 1) } : item
     );
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const removeItem = (index) => {
     const updatedCart = cart.filter((_, i) => i !== index);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const total = cart.reduce((sum, item) => {
@@ -36,9 +37,12 @@ const CartSummary = ({ cart, setCart }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Cart Summary
-        </Typography>
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+          <Typography variant="h6">Cart Summary</Typography>
+          <IconButton onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
         <List>
           {cart.map((item, index) => (
             <ListItem key={index} sx={{ display: "flex", alignItems: "center" }}>

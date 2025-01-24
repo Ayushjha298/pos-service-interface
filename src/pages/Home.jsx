@@ -81,10 +81,11 @@ const Home = () => {
       </Grid>
 
       <Drawer anchor="right" open={isCartOpen} onClose={() => setIsCartOpen(false)}>
-        <Box width={350} p={2}>
-          <CartSummary cart={cart} setCart={setCart} />
-        </Box>
-      </Drawer>
+  <Box width={350} p={2}>
+    <CartSummary cart={cart} setCart={setCart} onClose={() => setIsCartOpen(false)} />
+  </Box>
+</Drawer>
+
     </Box>
   );
 };

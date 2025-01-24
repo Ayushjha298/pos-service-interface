@@ -5,8 +5,7 @@ import { Box, Typography, Paper, List, ListItem, Divider } from "@mui/material";
 const Receipt = () => {
   const location = useLocation();
   const customer = location.state?.customer || { name: "Unknown", email: "Unknown" };
-
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = location.state?.cart || [];
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
